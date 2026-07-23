@@ -1,0 +1,784 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Rung Chuông Vàng – Trạng Nguyên Tiếng Việt lớp 5</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@500;600;700;800&family=Nunito:ital,wght@0,400;0,600;0,700;0,800;1,700&display=swap" rel="stylesheet">
+<style>
+/* ============ TOKENS ============ */
+:root{
+  --son:#E4342F;        /* đỏ son – dấu triện, câu đối */
+  --son-dark:#B01F1B;
+  --nghe:#FFC22E;       /* vàng nghệ – bảng vàng */
+  --nghe-soft:#FFE9A8;
+  --la:#1FBF8F;         /* xanh lá mạ */
+  --la-dark:#128A66;
+  --lam:#2C5FD6;        /* xanh lam – mực bút */
+  --lam-dark:#1B3E96;
+  --sen:#FF77A9;        /* hồng sen */
+  --tim:#8B5CF6;
+  --muc:#20223F;        /* mực tàu */
+  --giay:#FFF9EC;       /* giấy dó */
+  --giay-2:#FFEFD0;
+  --shadow:0 10px 0 rgba(32,34,63,.16);
+  --r:26px;
+  --ff-display:'Baloo 2','Segoe UI',system-ui,sans-serif;
+  --ff-body:'Nunito','Segoe UI',system-ui,sans-serif;
+}
+*{box-sizing:border-box;-webkit-tap-highlight-color:transparent}
+html,body{height:100%}
+body{
+  margin:0;font-family:var(--ff-body);color:var(--muc);
+  background:
+    radial-gradient(circle at 12% 8%, #FFE58A 0 12%, transparent 12.5%),
+    radial-gradient(circle at 88% 14%, #A8E9FF 0 10%, transparent 10.5%),
+    radial-gradient(circle at 78% 88%, #FFC9DE 0 12%, transparent 12.5%),
+    linear-gradient(170deg,#8FE3FF 0%,#C9F3E4 45%,#FFF3C9 100%);
+  background-attachment:fixed;
+  min-height:100%;overflow-x:hidden;
+}
+/* mây trang trí */
+.sky{position:fixed;inset:0;pointer-events:none;z-index:0;overflow:hidden}
+.cloud{position:absolute;font-size:clamp(28px,5vw,64px);opacity:.75;animation:drift linear infinite}
+@keyframes drift{from{transform:translateX(-20vw)}to{transform:translateX(120vw)}}
+.c1{top:6%;animation-duration:46s}
+.c2{top:22%;animation-duration:64s;animation-delay:-14s}
+.c3{top:70%;animation-duration:56s;animation-delay:-30s}
+.c4{top:86%;animation-duration:72s;animation-delay:-8s}
+
+.wrap{position:relative;z-index:2;max-width:1080px;margin:0 auto;padding:18px 16px 40px}
+.screen{display:none;animation:pop .45s cubic-bezier(.2,1.2,.35,1)}
+.screen.on{display:block}
+@keyframes pop{from{opacity:0;transform:translateY(22px) scale(.97)}to{opacity:1;transform:none}}
+
+/* ============ THẺ CHUNG ============ */
+.card{
+  background:var(--giay);border:5px solid var(--muc);border-radius:var(--r);
+  box-shadow:var(--shadow);padding:clamp(18px,3vw,34px);
+}
+h1,h2,h3{font-family:var(--ff-display);margin:0;line-height:1.12}
+
+/* ============ MÀN HÌNH BẮT ĐẦU ============ */
+.hero{text-align:center;position:relative;overflow:hidden}
+.hero:before{content:"";position:absolute;inset:-40% -10% auto -10%;height:70%;
+  background:repeating-conic-gradient(from 0deg,#FFE9A8 0 8deg,transparent 8deg 16deg);opacity:.45;
+  animation:spin 60s linear infinite}
+@keyframes spin{to{transform:rotate(360deg)}}
+.hero>*{position:relative}
+.badge-top{display:inline-block;background:var(--son);color:#fff;font-family:var(--ff-display);
+  font-weight:700;letter-spacing:.5px;padding:7px 20px;border-radius:999px;border:3px solid var(--muc);
+  font-size:clamp(13px,2vw,17px);transform:rotate(-2deg)}
+.title{
+  font-size:clamp(34px,8vw,74px);font-weight:800;margin:14px 0 4px;color:var(--son);
+  text-shadow:3px 3px 0 var(--nghe), 6px 6px 0 rgba(32,34,63,.18);
+}
+.subtitle{font-family:var(--ff-display);font-weight:600;font-size:clamp(17px,3.4vw,27px);color:var(--lam-dark)}
+.mascots{font-size:clamp(40px,9vw,78px);margin:10px 0 4px;letter-spacing:6px}
+.mascots span{display:inline-block;animation:bob 2.4s ease-in-out infinite}
+.mascots span:nth-child(2){animation-delay:.3s}
+.mascots span:nth-child(3){animation-delay:.6s}
+.mascots span:nth-child(4){animation-delay:.9s}
+@keyframes bob{0%,100%{transform:translateY(0) rotate(-4deg)}50%{transform:translateY(-14px) rotate(4deg)}}
+
+.rounds-preview{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:10px;margin:22px 0 6px;text-align:left}
+.rp{background:#fff;border:3px solid var(--muc);border-radius:16px;padding:10px 12px;font-weight:700;font-size:14px;
+  display:flex;align-items:center;gap:9px;box-shadow:0 5px 0 rgba(32,34,63,.14)}
+.rp b{font-size:24px;line-height:1}
+.rp.k1{background:#FFE1EC}.rp.k2{background:#DCF3FF}.rp.k3{background:#E4FBEF}
+.rp.k4{background:#FFF0CF}.rp.k5{background:#EDE4FF}.rp.k6{background:#FFE6D6}
+
+.name-row{display:flex;gap:10px;flex-wrap:wrap;justify-content:center;align-items:center;margin-top:18px}
+input[type=text]{
+  font-family:var(--ff-body);font-weight:700;font-size:18px;padding:13px 18px;border-radius:16px;
+  border:4px solid var(--muc);background:#fff;min-width:min(280px,80vw);outline:none;color:var(--muc)}
+input[type=text]:focus{border-color:var(--lam);box-shadow:0 0 0 4px #C7DBFF}
+
+/* ============ NÚT ============ */
+.btn{
+  font-family:var(--ff-display);font-weight:800;font-size:clamp(17px,2.6vw,24px);
+  padding:14px 34px;border-radius:999px;border:4px solid var(--muc);cursor:pointer;
+  background:var(--nghe);color:var(--muc);box-shadow:0 7px 0 var(--muc);
+  transition:transform .12s,box-shadow .12s;
+}
+.btn:hover{transform:translateY(-2px);box-shadow:0 9px 0 var(--muc)}
+.btn:active{transform:translateY(6px);box-shadow:0 1px 0 var(--muc)}
+.btn.green{background:var(--la);color:#fff}
+.btn.red{background:var(--son);color:#fff}
+.btn.blue{background:var(--lam);color:#fff}
+.btn.ghost{background:#fff}
+.btn.sm{font-size:16px;padding:9px 20px;border-width:3px;box-shadow:0 5px 0 var(--muc)}
+.btn:focus-visible{outline:4px dashed var(--lam);outline-offset:4px}
+
+/* ============ THANH TRẠNG THÁI ============ */
+.hud{display:flex;gap:10px;align-items:center;flex-wrap:wrap;margin-bottom:12px}
+.chip{background:#fff;border:4px solid var(--muc);border-radius:999px;padding:7px 16px;
+  font-family:var(--ff-display);font-weight:700;font-size:clamp(14px,2.2vw,19px);box-shadow:0 5px 0 rgba(32,34,63,.16)}
+.chip.round{background:var(--sen);color:#fff}
+.chip.score{background:var(--la);color:#fff}
+.chip.grow{flex:1;min-width:140px;padding:6px 10px;background:#fff}
+.bar{height:16px;background:#E7E2D3;border-radius:999px;overflow:hidden;border:2px solid var(--muc)}
+.bar>i{display:block;height:100%;width:0;background:linear-gradient(90deg,var(--nghe),var(--son));transition:width .45s}
+.icon-btn{width:46px;height:46px;border-radius:50%;border:4px solid var(--muc);background:#fff;cursor:pointer;
+  font-size:20px;box-shadow:0 5px 0 rgba(32,34,63,.16);line-height:1}
+.icon-btn:active{transform:translateY(4px);box-shadow:0 1px 0 rgba(32,34,63,.16)}
+
+/* ============ MÀN CHẶNG ============ */
+.round-hero{text-align:center;padding:clamp(26px,6vw,54px) 22px}
+.round-emoji{font-size:clamp(60px,15vw,120px);animation:bob 2s ease-in-out infinite;display:inline-block}
+.round-kicker{font-family:var(--ff-display);font-weight:700;color:var(--son);font-size:clamp(15px,2.6vw,20px);letter-spacing:2px}
+.round-name{font-size:clamp(28px,6.4vw,54px);font-weight:800;margin:6px 0 10px}
+.round-desc{font-size:clamp(15px,2.6vw,21px);font-weight:700;max-width:640px;margin:0 auto 22px;line-height:1.5}
+.stickers{font-size:clamp(24px,5vw,40px);letter-spacing:8px;margin-bottom:8px}
+
+/* ============ CÂU HỎI ============ */
+.q-card{position:relative}
+.q-tag{position:absolute;top:-22px;left:20px;background:var(--lam);color:#fff;border:4px solid var(--muc);
+  border-radius:999px;padding:5px 18px;font-family:var(--ff-display);font-weight:700;font-size:16px}
+.q-sticker{position:absolute;top:-30px;right:14px;font-size:44px;animation:bob 2.6s ease-in-out infinite}
+.q-lead{font-family:var(--ff-display);font-weight:600;color:var(--lam-dark);font-size:clamp(15px,2.4vw,20px);margin:6px 0 6px}
+.q-text{
+  font-family:var(--ff-display);font-weight:700;font-size:clamp(22px,4.6vw,40px);line-height:1.36;
+  margin:4px 0 6px;white-space:pre-line;
+}
+.q-text .blank{color:var(--son);background:var(--nghe-soft);padding:0 12px;border-radius:10px;
+  border-bottom:5px dotted var(--son)}
+.q-note{font-weight:700;color:#6B6A7E;font-size:clamp(13px,2vw,17px);font-style:italic;margin-bottom:6px}
+
+.opts{display:grid;gap:14px;margin-top:20px}
+.opts.two{grid-template-columns:repeat(auto-fit,minmax(230px,1fr))}
+.opts.four{grid-template-columns:repeat(auto-fit,minmax(190px,1fr))}
+.opt{
+  position:relative;font-family:var(--ff-display);font-weight:700;font-size:clamp(18px,3vw,27px);
+  padding:20px 16px 20px 62px;border-radius:22px;border:5px solid var(--muc);background:#fff;cursor:pointer;
+  text-align:left;box-shadow:0 7px 0 rgba(32,34,63,.2);transition:transform .12s,box-shadow .12s,background .2s;
+  color:var(--muc);min-height:78px;display:flex;align-items:center;
+}
+.opt .key{
+  position:absolute;left:12px;top:50%;transform:translateY(-50%);width:40px;height:40px;border-radius:50%;
+  display:grid;place-items:center;font-size:22px;border:3px solid var(--muc);background:var(--nghe-soft)
+}
+.opt:hover:not(:disabled){transform:translateY(-3px);box-shadow:0 10px 0 rgba(32,34,63,.2)}
+.opt:active:not(:disabled){transform:translateY(4px);box-shadow:0 2px 0 rgba(32,34,63,.2)}
+.opt:focus-visible{outline:4px dashed var(--lam);outline-offset:4px}
+.opt:disabled{cursor:default}
+.opt.right{background:var(--la);color:#fff;animation:cheer .55s}
+.opt.right .key{background:#fff}
+.opt.wrong{background:#FFD3D0;border-color:var(--son-dark);animation:shake .45s}
+.opt.dim{opacity:.42}
+@keyframes cheer{0%{transform:scale(1)}45%{transform:scale(1.07) rotate(-1.5deg)}100%{transform:scale(1)}}
+@keyframes shake{0%,100%{transform:translateX(0)}20%{transform:translateX(-9px)}40%{transform:translateX(9px)}60%{transform:translateX(-6px)}80%{transform:translateX(6px)}}
+
+/* biến thể theo chặng */
+.theme-hoa .opt{background:#FFEAF2;border-radius:34px 12px 34px 12px}
+.theme-hoa .opt .key{background:var(--sen);color:#fff}
+.theme-bong .opt{background:#E2F5FF;border-radius:50% 50% 42% 42%/58% 58% 34% 34%}
+.theme-bong .opt .key{background:var(--lam);color:#fff}
+.theme-bong{row-gap:32px}
+.theme-bong .opt:after{content:"";position:absolute;left:50%;bottom:-15px;width:3px;height:15px;background:var(--muc);border-radius:2px}
+.theme-can .opt{background:#E6FBF1;border-radius:14px}
+.theme-can .opt .key{background:var(--la);color:#fff}
+.theme-lac .opt{background:#FFF6DA;border-radius:999px;padding-left:58px}
+.theme-lac .opt .key{background:var(--nghe);color:var(--muc)}
+.theme-tho .opt{background:#F1EAFF;border-radius:8px 26px 8px 26px}
+.theme-tho .opt .key{background:var(--tim);color:#fff}
+.theme-do .opt{background:#FFEDE0;border-radius:18px}
+.theme-do .opt .key{background:var(--son);color:#fff}
+
+/* ============ PHẢN HỒI ============ */
+.feedback{margin-top:18px;border-radius:22px;border:5px solid var(--muc);padding:16px 18px;display:none;
+  box-shadow:0 7px 0 rgba(32,34,63,.18);animation:pop .4s}
+.feedback.on{display:block}
+.feedback.good{background:#D9FBEB}
+.feedback.bad{background:#FFE4E1}
+.fb-head{font-family:var(--ff-display);font-weight:800;font-size:clamp(20px,3.6vw,30px);display:flex;align-items:center;gap:10px}
+.fb-head .em{font-size:1.4em;animation:bob 1.6s ease-in-out infinite}
+.fb-body{font-weight:700;font-size:clamp(15px,2.4vw,20px);margin-top:6px;line-height:1.5}
+.fb-body b{color:var(--son-dark)}
+.fb-row{display:flex;justify-content:flex-end;margin-top:14px}
+
+/* ============ HOÀN THÀNH CHẶNG ============ */
+.stars{font-size:clamp(30px,7vw,54px);letter-spacing:6px;margin:8px 0}
+
+/* ============ KẾT QUẢ ============ */
+.rank-emoji{font-size:clamp(64px,16vw,130px);animation:bob 2.2s ease-in-out infinite;display:inline-block}
+.rank-name{font-size:clamp(30px,7vw,62px);font-weight:800;color:var(--son);
+  text-shadow:3px 3px 0 var(--nghe),6px 6px 0 rgba(32,34,63,.16);margin:6px 0}
+.score-big{font-family:var(--ff-display);font-weight:800;font-size:clamp(26px,5.6vw,44px)}
+.score-big em{color:var(--son);font-style:normal}
+.review{margin-top:22px;text-align:left}
+.review h3{font-size:clamp(19px,3.4vw,26px);margin-bottom:10px}
+.rv{background:#fff;border:4px solid var(--muc);border-radius:18px;padding:12px 15px;margin-bottom:10px;
+  font-weight:700;font-size:clamp(14px,2.2vw,18px);line-height:1.5}
+.rv .qq{color:var(--lam-dark)}
+.rv .aa{color:var(--la-dark)}
+.rv .bb{color:var(--son-dark);text-decoration:line-through}
+.round-scores{display:grid;grid-template-columns:repeat(auto-fit,minmax(148px,1fr));gap:10px;margin-top:18px;text-align:left}
+.rs{background:#fff;border:4px solid var(--muc);border-radius:16px;padding:10px 12px;font-weight:800;font-size:15px;
+  display:flex;align-items:center;gap:8px}
+.rs b{font-size:22px}
+.rs i{margin-left:auto;font-style:normal;font-family:var(--ff-display);font-size:18px}
+
+/* ============ HIỆU ỨNG ============ */
+#confetti{position:fixed;inset:0;pointer-events:none;z-index:60;overflow:hidden}
+.conf{position:absolute;font-size:26px;animation:fall linear forwards}
+@keyframes fall{
+  0%{transform:translateY(-12vh) rotate(0deg);opacity:1}
+  100%{transform:translateY(112vh) rotate(720deg);opacity:.9}
+}
+#toast{position:fixed;left:50%;top:16px;transform:translateX(-50%) scale(.6);z-index:70;
+  font-family:var(--ff-display);font-weight:800;font-size:clamp(26px,6vw,52px);
+  padding:10px 30px;border-radius:999px;border:5px solid var(--muc);background:var(--nghe);
+  box-shadow:0 8px 0 rgba(32,34,63,.25);opacity:0;transition:opacity .2s,transform .3s cubic-bezier(.2,1.5,.4,1);pointer-events:none}
+#toast.on{opacity:1;transform:translateX(-50%) scale(1)}
+#toast.sad{background:#FFD3D0}
+
+.foot{text-align:center;margin-top:18px;font-weight:700;font-size:13px;color:#5C5B70}
+.tips{background:#fff;border:4px dashed var(--muc);border-radius:18px;padding:12px 16px;margin-top:16px;
+  font-weight:700;font-size:14px;line-height:1.6;text-align:left}
+
+@media (max-width:520px){
+  .opt{font-size:19px;padding:16px 12px 16px 56px;min-height:66px}
+  .q-sticker{display:none}
+}
+@media (prefers-reduced-motion:reduce){
+  *{animation-duration:.01ms !important;animation-iteration-count:1 !important;transition-duration:.01ms !important}
+}
+</style>
+</head>
+<body>
+
+<div class="sky" aria-hidden="true">
+  <div class="cloud c1">☁️</div>
+  <div class="cloud c2">🕊️</div>
+  <div class="cloud c3">☁️</div>
+  <div class="cloud c4">🪁</div>
+</div>
+
+<div id="confetti" aria-hidden="true"></div>
+<div id="toast" role="status" aria-live="polite"></div>
+
+<div class="wrap">
+
+  <!-- ============ MÀN HÌNH BẮT ĐẦU ============ -->
+  <section id="s-start" class="screen on">
+    <div class="card hero">
+      <span class="badge-top">Cẩm nang Trạng Nguyên Tiếng Việt · Lớp 5</span>
+      <div class="mascots"><span>🐣</span><span>📚</span><span>🏆</span><span>🐥</span></div>
+      <h1 class="title">RUNG CHUÔNG VÀNG</h1>
+      <p class="subtitle">30 câu hỏi · 6 chặng thi tài · Ai sẽ thành Trạng Nguyên?</p>
+
+      <div class="rounds-preview">
+        <div class="rp k1"><b>🌸</b> Chặng 1<br>Vườn Thành Ngữ</div>
+        <div class="rp k2"><b>🎈</b> Chặng 2<br>Bong Bóng Đồng Nghĩa</div>
+        <div class="rp k3"><b>⚖️</b> Chặng 3<br>Cân Trái Nghĩa</div>
+        <div class="rp k4"><b>🔍</b> Chặng 4<br>Ai Lạc Nhóm?</div>
+        <div class="rp k5"><b>📜</b> Chặng 5<br>Vườn Thơ</div>
+        <div class="rp k6"><b>🧩</b> Chặng 6<br>Đố Vui Trạng Nguyên</div>
+      </div>
+
+      <div class="name-row">
+        <input type="text" id="playerName" placeholder="Tên của em là gì? 😊" maxlength="24" aria-label="Nhập tên học sinh">
+        <button class="btn green" id="btnStart">Bắt đầu thi tài! 🚀</button>
+      </div>
+
+      <div class="tips">
+        💡 <b>Mách nhỏ:</b> Bấm phím <b>1 2 3 4</b> để chọn nhanh, phím <b>Enter</b> để sang câu tiếp theo.
+        Bấm nút 🔊 để bật/tắt âm thanh. Trò chơi chiếu máy chiếu hoặc bảng tương tác đều đẹp nhé!
+      </div>
+    </div>
+    <p class="foot">Nội dung soạn theo <i>Cẩm nang Trạng Nguyên Tiếng Việt lớp 5</i></p>
+  </section>
+
+  <!-- ============ MÀN GIỚI THIỆU CHẶNG ============ -->
+  <section id="s-round" class="screen">
+    <div class="card round-hero">
+      <div class="round-emoji" id="roundEmoji">🌸</div>
+      <p class="round-kicker" id="roundKicker">CHẶNG 1 / 6</p>
+      <h2 class="round-name" id="roundName">Vườn Thành Ngữ</h2>
+      <p class="round-desc" id="roundDesc"></p>
+      <div class="stickers" id="roundStickers">✨ 🌟 ✨</div>
+      <button class="btn blue" id="btnGoRound">Vào chặng nào! 👉</button>
+    </div>
+  </section>
+
+  <!-- ============ MÀN CÂU HỎI ============ -->
+  <section id="s-quiz" class="screen">
+    <div class="hud">
+      <span class="chip round" id="hudRound">🌸 Chặng 1</span>
+      <span class="chip score" id="hudScore">⭐ 0</span>
+      <span class="chip" id="hudStreak">🔥 0</span>
+      <span class="chip grow">
+        <span style="font-size:13px;font-weight:800" id="hudProgressText">Câu 1 / 30</span>
+        <span class="bar"><i id="hudBar"></i></span>
+      </span>
+      <button class="icon-btn" id="btnSound" title="Bật/tắt âm thanh" aria-label="Bật hoặc tắt âm thanh">🔊</button>
+    </div>
+
+    <div class="card q-card">
+      <span class="q-tag" id="qTag">Câu 1</span>
+      <span class="q-sticker" id="qSticker">🐥</span>
+      <p class="q-lead" id="qLead"></p>
+      <h2 class="q-text" id="qText"></h2>
+      <p class="q-note" id="qNote"></p>
+      <div class="opts four" id="opts"></div>
+
+      <div class="feedback" id="feedback">
+        <div class="fb-head"><span class="em" id="fbEmoji">🎉</span><span id="fbTitle"></span></div>
+        <div class="fb-body" id="fbBody"></div>
+        <div class="fb-row"><button class="btn green sm" id="btnNext">Câu tiếp theo 👉</button></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ MÀN HOÀN THÀNH CHẶNG ============ -->
+  <section id="s-done" class="screen">
+    <div class="card round-hero">
+      <div class="round-emoji" id="doneEmoji">🎊</div>
+      <h2 class="round-name" id="doneTitle">Hoàn thành chặng!</h2>
+      <div class="stars" id="doneStars">⭐⭐⭐</div>
+      <p class="round-desc" id="doneDesc"></p>
+      <button class="btn blue" id="btnNextRound">Chặng tiếp theo 👉</button>
+    </div>
+  </section>
+
+  <!-- ============ MÀN KẾT QUẢ ============ -->
+  <section id="s-end" class="screen">
+    <div class="card hero">
+      <div class="rank-emoji" id="rankEmoji">🏆</div>
+      <p class="round-kicker">KẾT QUẢ CUỘC THI</p>
+      <h2 class="rank-name" id="rankName">TRẠNG NGUYÊN</h2>
+      <p class="score-big">Em trả lời đúng <em id="finalScore">0</em> / 30 câu</p>
+      <p class="round-desc" id="rankDesc" style="margin-top:10px"></p>
+
+      <div class="round-scores" id="roundScores"></div>
+
+      <div class="review" id="reviewBox"></div>
+
+      <div class="name-row" style="margin-top:24px">
+        <button class="btn green" id="btnAgain">Chơi lại từ đầu 🔄</button>
+        <button class="btn ghost" id="btnPrint">In kết quả 🖨️</button>
+      </div>
+    </div>
+  </section>
+
+</div>
+
+<script>
+/* =========================================================
+   NGÂN HÀNG CÂU HỎI – 6 CHẶNG × 5 CÂU = 30 CÂU
+   Nguồn: Cẩm nang Trạng Nguyên Tiếng Việt lớp 5
+   ========================================================= */
+const ROUNDS = [
+  {
+    name:"Vườn Thành Ngữ", emoji:"🌸", theme:"theme-hoa", sticker:"🌷",
+    desc:"Mỗi bông hoa giấu một từ. Em hãy chọn bông hoa có từ đúng để câu thành ngữ – tục ngữ nở trọn vẹn nhé!",
+    lead:"Chọn từ còn thiếu trong câu thành ngữ – tục ngữ:",
+    questions:[
+      { text:"Tiên học ___, hậu học văn.", options:["lễ","chữ","bài","nghề"], answer:0,
+        why:"“Tiên học lễ, hậu học văn” – trước tiên phải học lễ nghĩa, cách làm người, sau đó mới học chữ nghĩa." },
+      { text:"Uống nước nhớ ___.", options:["sông","nguồn","ơn","người"], answer:1,
+        why:"“Uống nước nhớ nguồn” – nhắc chúng ta luôn biết ơn người đã tạo ra thành quả mình đang hưởng." },
+      { text:"Lá ___ đùm lá rách.", options:["non","xanh","lành","già"], answer:2,
+        why:"“Lá lành đùm lá rách” – người có điều kiện hơn hãy giúp đỡ, che chở người khó khăn." },
+      { text:"Có công mài sắt, có ngày nên ___.", options:["vàng","kim","dao","thép"], answer:1,
+        why:"“Có công mài sắt, có ngày nên kim” – kiên trì bền bỉ thì việc khó mấy cũng thành công." },
+      { text:"Kiến tha ___ cũng đầy tổ.", options:["mồi","về","lâu","nhiều"], answer:2,
+        why:"“Kiến tha lâu cũng đầy tổ” – làm việc nhỏ nhưng chăm chỉ, đều đặn thì sẽ có kết quả lớn." }
+    ]
+  },
+  {
+    name:"Bong Bóng Đồng Nghĩa", emoji:"🎈", theme:"theme-bong", sticker:"🫧",
+    desc:"Trên trời có 4 quả bong bóng. Em hãy bấm vỡ đúng quả mang từ CÙNG NGHĨA với từ khoá nhé!",
+    lead:"Bấm vỡ quả bong bóng chứa từ ĐỒNG NGHĨA với:",
+    questions:[
+      { text:"SIÊNG NĂNG", options:["cần cù","lười biếng","vội vàng","hiền lành"], answer:0,
+        why:"“Siêng năng – cần cù” là cặp từ đồng nghĩa, đều chỉ sự chăm chỉ làm việc." },
+      { text:"BAO LA", options:["chật chội","bát ngát","cao vút","sâu thẳm"], answer:1,
+        why:"“Bao la – bát ngát” là cặp từ đồng nghĩa, cùng chỉ không gian rộng lớn mênh mông." },
+      { text:"KIÊN TRÌ", options:["nóng nảy","vội vã","nhẫn nại","mạnh mẽ"], answer:2,
+        why:"“Kiên trì – nhẫn nại” là cặp từ đồng nghĩa, cùng chỉ sự bền bỉ, không bỏ cuộc." },
+      { text:"XE LỬA", options:["xe khách","tàu thuỷ","xe buýt","tàu hoả"], answer:3,
+        why:"“Xe lửa – tàu hoả” là hai tên gọi của cùng một phương tiện chạy trên đường ray." },
+      { text:"ĐẤT NƯỚC", options:["giang sơn","thôn xóm","ruộng đồng","thành phố"], answer:0,
+        why:"“Đất nước – giang sơn” là cặp từ đồng nghĩa, cùng chỉ Tổ quốc, non sông của mình." }
+    ]
+  },
+  {
+    name:"Cân Trái Nghĩa", emoji:"⚖️", theme:"theme-can", sticker:"🐿️",
+    desc:"Chiếc cân đang lệch! Em hãy đặt lên đĩa cân từ có nghĩa TRÁI NGƯỢC để cân thăng bằng trở lại.",
+    lead:"Chọn từ TRÁI NGHĨA với:",
+    questions:[
+      { text:"KIÊU CĂNG", options:["tự tin","khiêm tốn","vui vẻ","dũng cảm"], answer:1,
+        why:"“Kiêu căng >< khiêm tốn”. Người khiêm tốn không khoe khoang, luôn biết học hỏi người khác." },
+      { text:"BÌNH MINH", options:["hoàng hôn","giữa trưa","ban mai","đêm khuya"], answer:0,
+        why:"“Bình minh >< hoàng hôn”. Bình minh là lúc mặt trời mọc, hoàng hôn là lúc mặt trời lặn." },
+      { text:"BẮT ĐẦU", options:["mở màn","tiếp tục","kết thúc","chuẩn bị"], answer:2,
+        why:"“Bắt đầu >< kết thúc”. Hai từ chỉ hai đầu mối ngược nhau của một sự việc." },
+      { text:"HOANG PHÍ", options:["giàu có","rộng rãi","hào phóng","tiết kiệm"], answer:3,
+        why:"“Hoang phí >< tiết kiệm”. Tiết kiệm là biết dùng của cải đúng mức, không lãng phí." },
+      { text:"NHÚT NHÁT", options:["hiền lành","bạo dạn","ít nói","cẩn thận"], answer:1,
+        why:"“Nhút nhát >< bạo dạn”. Bạn bạo dạn thì tự tin phát biểu, không sợ sệt." }
+    ]
+  },
+  {
+    name:"Ai Lạc Nhóm?", emoji:"🔍", theme:"theme-lac", sticker:"🕵️",
+    desc:"Trong mỗi nhóm có một bạn từ đi lạc! Em hãy dùng kính lúp tìm ra từ KHÔNG cùng nhóm với các từ còn lại.",
+    lead:"Tìm từ KHÔNG thuộc nhóm:",
+    questions:[
+      { text:"đàn bầu · đàn nhị · đàn tranh · đàn vịt", options:["đàn bầu","đàn nhị","đàn tranh","đàn vịt"], answer:3,
+        why:"Ba từ đầu là nhạc cụ dân tộc. “Đàn vịt” lại chỉ một bầy vịt – không phải nhạc cụ." },
+      { text:"châu chấu · cào cào · bồ câu · dế mèn", options:["châu chấu","cào cào","bồ câu","dế mèn"], answer:2,
+        why:"Châu chấu, cào cào, dế mèn đều là côn trùng. “Bồ câu” là loài chim." },
+      { text:"kính mắt · kính trọng · kính yêu · kính mến", options:["kính mắt","kính trọng","kính yêu","kính mến"], answer:0,
+        why:"Ba từ sau đều chỉ tình cảm quý trọng. “Kính mắt” là đồ vật để đeo lên mắt." },
+      { text:"trung thực · trung hậu · trung tâm · trung kiên", options:["trung thực","trung hậu","trung tâm","trung kiên"], answer:2,
+        why:"“Trung” trong ba từ kia nghĩa là một lòng, ngay thẳng. “Trung tâm” lại nghĩa là ở giữa." },
+      { text:"giang sơn · đất nước · Tổ quốc · thung lũng", options:["giang sơn","đất nước","Tổ quốc","thung lũng"], answer:3,
+        why:"Ba từ đầu cùng chỉ Tổ quốc. “Thung lũng” chỉ một dạng địa hình trũng giữa các dãy núi." }
+    ]
+  },
+  {
+    name:"Vườn Thơ", emoji:"📜", theme:"theme-tho", sticker:"🪷",
+    desc:"Những vần thơ em yêu đang chờ em đó! Hãy điền từ còn thiếu hoặc gọi đúng tên nhà thơ nhé.",
+    lead:"Đọc kĩ vần thơ rồi chọn đáp án đúng:",
+    questions:[
+      { text:"Việt Nam đất nước ta ơi\nMênh mông biển lúa đâu trời đẹp hơn\nCánh ___ bay lả rập rờn\nMây mờ che đỉnh Trường Sơn sớm chiều.",
+        note:"(Nguyễn Đình Thi)", options:["chim","cò","én","diều"], answer:1,
+        why:"Câu thơ đúng là “Cánh cò bay lả rập rờn” – hình ảnh cánh cò rất quen thuộc của làng quê Việt Nam." },
+      { text:"“Trái đất này là của chúng mình\nQuả bóng xanh bay giữa trời xanh”\n\nHai câu thơ trên là của nhà thơ nào?",
+        options:["Định Hải","Tố Hữu","Trần Đăng Khoa","Nguyễn Đình Thi"], answer:0,
+        why:"Đây là bài thơ “Bài ca về trái đất” của nhà thơ Định Hải." },
+      { text:"Cánh đồng đang buổi ban trưa\nMồ hôi thánh thót như mưa ruộng cày\nAi ơi, bưng bát cơm đầy\nDẻo thơm một hạt, đắng cay ___ phần!",
+        note:"(Ca dao)", options:["trăm","mọi","muôn","vạn"], answer:2,
+        why:"Câu ca dao đúng là “Dẻo thơm một hạt, đắng cay muôn phần!” – nhắc ta trân trọng hạt gạo và công sức người nông dân." },
+      { text:"“Bầm ơi, có rét không bầm?\nHeo heo gió núi, lâm thâm mưa phùn”\n\nHai câu thơ trên là của nhà thơ nào?",
+        options:["Xuân Quỳnh","Tố Hữu","Hoàng Trung Thông","Nguyễn Đức Mậu"], answer:1,
+        why:"Đây là bài thơ “Bầm ơi” của nhà thơ Tố Hữu, viết về tình mẹ con thời kháng chiến." },
+      { text:"Tuổi thơ chở đầy ___\nDòng sông lời mẹ ngọt ngào\nĐưa con đi cùng đất nước\nChòng chành nhịp võng ca dao.",
+        note:"(Trương Nam Hương)", options:["kỉ niệm","cổ tích","ước mơ","tiếng ru"], answer:1,
+        why:"Câu thơ đúng là “Tuổi thơ chở đầy cổ tích” trong bài “Trong lời mẹ hát”." }
+    ]
+  },
+  {
+    name:"Đố Vui Trạng Nguyên", emoji:"🧩", theme:"theme-do", sticker:"🦉",
+    desc:"Chặng cuối cùng! Đây là những câu đố chữ hóc búa nhất. Em hãy thật bình tĩnh và thông minh nhé!",
+    lead:"Suy nghĩ thật kĩ rồi chọn đáp án:",
+    questions:[
+      { text:"Là tên sao ở trời cao\nBỏ nón thành thú bay vào cung trăng\nNặng vào tuổi mãi thêm tăng\nRâu vào thì hoá người làm thủ công.\n\nĐó là sao gì?",
+        options:["Sao Thổ","Sao Hoả","Sao Kim","Sao Mộc"], answer:0,
+        why:"Đáp án là <b>Sao Thổ</b>. Bỏ nón → THỎ (con thỏ trên cung trăng); thêm dấu nặng → THỌ (sống lâu); thêm râu → THỢ (người làm thủ công)." },
+      { text:"Để nguyên tên một ngôi sao\nBỏ dấu thì lại ngạt ngào hương thơm\nThêm nặng bé vẽ tranh liền\nThêm huyền thì giống bà tiên rất hiền.\n\nĐó là sao gì?",
+        options:["Sao Thuỷ","Sao Kim","Sao Hoả","Sao Mai"], answer:2,
+        why:"Đáp án là <b>Sao Hoả</b>. Bỏ dấu → HOA (thơm ngát); thêm nặng → HOẠ (vẽ tranh); thêm huyền → HOÀ (hiền hoà như bà tiên)." },
+      { text:"Để nguyên trái nghĩa với chìm\nBỏ đầu thành quả ngon lành bé ăn\nBỏ đuôi tiếng động vang trời\nBịt tai lại nhé, không chơi chữ này!\n\nĐể nguyên là chữ gì?",
+        options:["nổi","bổi","trôi","dội"], answer:0,
+        why:"Đáp án là <b>NỔI</b> (trái nghĩa với chìm). Bỏ đầu → ỔI (quả ổi); bỏ đuôi → NỔ (tiếng nổ vang trời)." },
+      { text:"Từ gì mà lại lạ lùng\nCó 9 chữ h chỉ trong một từ?",
+        options:["hùng","chính","hành","khánh"], answer:1,
+        why:"Đáp án là chữ <b>CHÍNH</b> – vì tách ra sẽ thành “CHÍN – H”, tức là 9 chữ H đó em!" },
+      { text:"Ai là ông Trạng thả diều\nMười ba tuổi đã đỗ đầu Trạng Nguyên?",
+        options:["Mạc Đĩnh Chi","Lê Quý Đôn","Nguyễn Hiền","Lương Thế Vinh"], answer:2,
+        why:"Đáp án là <b>Nguyễn Hiền</b> – Trạng Nguyên trẻ tuổi nhất nước ta, đỗ khi mới 13 tuổi. (Còn Mạc Đĩnh Chi là Lưỡng quốc Trạng Nguyên nhé!)" }
+    ]
+  }
+];
+
+/* ===================== TRẠNG THÁI ===================== */
+const TOTAL = ROUNDS.reduce((s,r)=>s+r.questions.length,0);
+let state = { r:0, q:0, score:0, streak:0, best:0, answered:false, roundScore:0, roundScores:[], wrong:[], player:"" };
+let soundOn = true;
+
+/* ===================== ÂM THANH (Web Audio API) ===================== */
+let actx = null;
+function AC(){
+  if(!actx){
+    try{ actx = new (window.AudioContext||window.webkitAudioContext)(); }catch(e){ return null; }
+  }
+  if(actx.state==="suspended") actx.resume();
+  return actx;
+}
+function beep(freq, at, dur, type, vol, slideTo){
+  const c = AC(); if(!c || !soundOn) return;
+  const t = c.currentTime + at;
+  const o = c.createOscillator(), g = c.createGain();
+  o.type = type || "sine";
+  o.frequency.setValueAtTime(freq, t);
+  if(slideTo) o.frequency.exponentialRampToValueAtTime(slideTo, t+dur);
+  g.gain.setValueAtTime(0.0001, t);
+  g.gain.exponentialRampToValueAtTime(vol||0.22, t+0.02);
+  g.gain.exponentialRampToValueAtTime(0.0001, t+dur);
+  o.connect(g); g.connect(c.destination);
+  o.start(t); o.stop(t+dur+0.05);
+}
+/* Âm thanh CHÚC MỪNG khi trả lời ĐÚNG */
+function sndCorrect(){
+  if(!soundOn) return;
+  const seq = [523.25, 659.25, 783.99, 1046.50];      // Đô – Mi – Sol – Đô cao
+  seq.forEach((f,i)=> beep(f, i*0.085, 0.3, "triangle", 0.24));
+  beep(1318.51, 0.34, 0.42, "sine", 0.16);            // ngân vang
+  [1567.98, 2093.00].forEach((f,i)=> beep(f, 0.42+i*0.07, 0.22, "sine", 0.09)); // lấp lánh
+}
+/* Âm thanh CHIA BUỒN khi trả lời SAI */
+function sndWrong(){
+  if(!soundOn) return;
+  beep(392.00, 0.00, 0.20, "sawtooth", 0.13);   // Sol
+  beep(349.23, 0.18, 0.20, "sawtooth", 0.13);   // Fa
+  beep(311.13, 0.36, 0.26, "sawtooth", 0.13);   // Mi giáng
+  beep(261.63, 0.56, 0.55, "sine", 0.16, 174.61); // trượt xuống buồn thiu
+}
+function sndClick(){ beep(880, 0, 0.06, "square", 0.06); }
+function sndRound(){
+  if(!soundOn) return;
+  [523.25,659.25,783.99,1046.50,783.99,1046.50].forEach((f,i)=> beep(f, i*0.11, 0.3, "triangle", 0.2));
+}
+function sndWin(){
+  if(!soundOn) return;
+  const m = [523.25,523.25,523.25,659.25,783.99,659.25,783.99,1046.50];
+  const d = [0,0.13,0.26,0.40,0.56,0.72,0.86,1.02];
+  m.forEach((f,i)=> beep(f, d[i], 0.34, "triangle", 0.22));
+  beep(1046.50, 1.30, 0.9, "sine", 0.18);
+}
+
+/* ===================== TIỆN ÍCH ===================== */
+const $ = id => document.getElementById(id);
+function show(id){
+  document.querySelectorAll(".screen").forEach(s=>s.classList.remove("on"));
+  $(id).classList.add("on");
+  window.scrollTo({top:0, behavior:"smooth"});
+}
+function toast(text, sad){
+  const t = $("toast");
+  t.textContent = text;
+  t.classList.toggle("sad", !!sad);
+  t.classList.add("on");
+  setTimeout(()=>t.classList.remove("on"), 1200);
+}
+const CONF = ["🎉","⭐","🌟","✨","🎊","🌸","🏅","💛","🎈","🍀"];
+function confetti(n){
+  const box = $("confetti");
+  for(let i=0;i<(n||34);i++){
+    const s = document.createElement("div");
+    s.className = "conf";
+    s.textContent = CONF[Math.floor(Math.random()*CONF.length)];
+    s.style.left = Math.random()*100 + "vw";
+    s.style.fontSize = (18 + Math.random()*26) + "px";
+    s.style.animationDuration = (1.9 + Math.random()*1.6) + "s";
+    s.style.animationDelay = (Math.random()*0.35) + "s";
+    box.appendChild(s);
+    setTimeout(()=>s.remove(), 4200);
+  }
+}
+function fmtQuestion(txt){
+  return txt.replace(/___/g, '<span class="blank">? ? ?</span>');
+}
+
+/* ===================== LUỒNG TRÒ CHƠI ===================== */
+function startGame(){
+  state = { r:0, q:0, score:0, streak:0, best:0, answered:false, roundScore:0, roundScores:[], wrong:[],
+            player: ($("playerName").value || "").trim() };
+  AC(); sndClick();
+  showRoundIntro();
+}
+function showRoundIntro(){
+  const r = ROUNDS[state.r];
+  $("roundEmoji").textContent = r.emoji;
+  $("roundKicker").textContent = "CHẶNG " + (state.r+1) + " / " + ROUNDS.length;
+  $("roundName").textContent = r.name;
+  $("roundDesc").textContent = r.desc;
+  $("roundStickers").textContent = "🌟 " + r.sticker + " 🌟";
+  show("s-round");
+}
+function renderQuestion(){
+  const r = ROUNDS[state.r], q = r.questions[state.q];
+  const done = ROUNDS.slice(0,state.r).reduce((s,x)=>s+x.questions.length,0) + state.q;
+
+  $("hudRound").textContent = r.emoji + " Chặng " + (state.r+1);
+  $("hudScore").textContent = "⭐ " + state.score;
+  $("hudStreak").textContent = "🔥 " + state.streak;
+  $("hudProgressText").textContent = "Câu " + (done+1) + " / " + TOTAL;
+  $("hudBar").style.width = (done / TOTAL * 100) + "%";
+
+  $("qTag").textContent = "Câu " + (done+1);
+  $("qSticker").textContent = r.sticker;
+  $("qLead").textContent = r.lead;
+  $("qText").innerHTML = fmtQuestion(q.text);
+  $("qNote").textContent = q.note || "";
+  $("qNote").style.display = q.note ? "block" : "none";
+
+  const box = $("opts");
+  box.className = "opts four " + r.theme;
+  box.innerHTML = "";
+  const keys = ["1️⃣","2️⃣","3️⃣","4️⃣"];
+  q.options.forEach((opt,i)=>{
+    const b = document.createElement("button");
+    b.className = "opt";
+    b.type = "button";
+    b.innerHTML = '<span class="key">'+keys[i]+'</span><span>'+opt+'</span>';
+    b.addEventListener("click", ()=>choose(i));
+    box.appendChild(b);
+  });
+
+  $("feedback").className = "feedback";
+  state.answered = false;
+  show("s-quiz");
+}
+function choose(i){
+  if(state.answered) return;
+  state.answered = true;
+
+  const r = ROUNDS[state.r], q = r.questions[state.q];
+  const btns = Array.from($("opts").children);
+  btns.forEach(b => b.disabled = true);
+
+  const ok = (i === q.answer);
+  if(ok){
+    state.score++; state.roundScore++; state.streak++;
+    state.best = Math.max(state.best, state.streak);
+    btns[i].classList.add("right");
+    btns.forEach((b,k)=>{ if(k!==i) b.classList.add("dim"); });
+    sndCorrect(); confetti(34);
+    const praise = ["Chính xác rồi! 🎉","Giỏi quá em ơi! 🌟","Tuyệt vời! 👏","Xuất sắc! 🏅","Quá đỉnh! 🚀"];
+    const line = praise[Math.floor(Math.random()*praise.length)];
+    toast(line);
+    $("feedback").className = "feedback on good";
+    $("fbEmoji").textContent = ["🎉","🥳","🌟","👏","🏆"][Math.floor(Math.random()*5)];
+    $("fbTitle").textContent = line + (state.streak>=3 ? "  (chuỗi " + state.streak + " câu 🔥)" : "");
+  }else{
+    state.streak = 0;
+    btns[i].classList.add("wrong");
+    btns[q.answer].classList.add("right");
+    sndWrong();
+    toast("Tiếc quá! 😢", true);
+    state.wrong.push({
+      round: r.name, roundEmoji: r.emoji,
+      q: q.text.replace(/\n/g," ").replace(/___/g,"……"),
+      picked: q.options[i], correct: q.options[q.answer], why: q.why
+    });
+    $("feedback").className = "feedback on bad";
+    $("fbEmoji").textContent = ["😢","🙁","😿","💧"][Math.floor(Math.random()*4)];
+    $("fbTitle").textContent = "Ồ, chưa đúng rồi! Cố lên em nhé 💪";
+  }
+
+  $("fbBody").innerHTML =
+    (ok ? "" : "Đáp án đúng là: <b>" + q.options[q.answer] + "</b><br>") + q.why;
+
+  const isLast = (state.r === ROUNDS.length-1) && (state.q === r.questions.length-1);
+  $("btnNext").textContent = isLast ? "Xem kết quả 🏁" : "Câu tiếp theo 👉";
+  setTimeout(()=>$("btnNext").focus(), 350);
+}
+function nextQuestion(){
+  sndClick();
+  const r = ROUNDS[state.r];
+  if(state.q < r.questions.length-1){
+    state.q++;
+    renderQuestion();
+  }else{
+    state.roundScores.push(state.roundScore);
+    showRoundDone();
+  }
+}
+function showRoundDone(){
+  const r = ROUNDS[state.r];
+  const got = state.roundScore, max = r.questions.length;
+  const isLast = state.r === ROUNDS.length-1;
+
+  let stars, msg, em;
+  if(got === max){ stars="⭐⭐⭐"; em="🏆"; msg="Trọn vẹn " + got + "/" + max + " câu! Em thật xuất sắc!"; }
+  else if(got >= max-1){ stars="⭐⭐"; em="🎊"; msg="Đúng " + got + "/" + max + " câu. Rất giỏi, chỉ suýt trọn vẹn thôi!"; }
+  else if(got >= Math.ceil(max/2)){ stars="⭐"; em="😃"; msg="Đúng " + got + "/" + max + " câu. Khá lắm, cố thêm chút nữa nhé!"; }
+  else { stars="🌱"; em="💪"; msg="Đúng " + got + "/" + max + " câu. Không sao đâu, chặng sau em sẽ làm tốt hơn!"; }
+
+  $("doneEmoji").textContent = em;
+  $("doneTitle").textContent = "Xong chặng " + (state.r+1) + ": " + r.name + "!";
+  $("doneStars").textContent = stars;
+  $("doneDesc").textContent = msg;
+  $("btnNextRound").textContent = isLast ? "Xem kết quả chung cuộc 🏁" : "Chặng tiếp theo 👉";
+  sndRound(); confetti(got===max ? 46 : 18);
+  show("s-done");
+}
+function nextRound(){
+  sndClick();
+  if(state.r < ROUNDS.length-1){
+    state.r++; state.q = 0; state.roundScore = 0;
+    showRoundIntro();
+  }else{
+    showEnd();
+  }
+}
+function showEnd(){
+  const s = state.score;
+  let rank, emoji, desc;
+  if(s >= 27){ rank="TRẠNG NGUYÊN"; emoji="🏆"; desc="Tài giỏi tuyệt vời! Em xứng đáng đứng đầu bảng vàng của lớp mình!"; }
+  else if(s >= 22){ rank="BẢNG NHÃN"; emoji="🥈"; desc="Rất xuất sắc! Chỉ còn một chút nữa là em chạm tới ngôi Trạng Nguyên rồi."; }
+  else if(s >= 17){ rank="THÁM HOA"; emoji="🥉"; desc="Giỏi lắm! Em đã nắm khá vững kiến thức Tiếng Việt lớp 5."; }
+  else if(s >= 12){ rank="CỬ NHÂN"; emoji="📜"; desc="Cố gắng tốt! Em ôn thêm phần thành ngữ và từ đồng nghĩa – trái nghĩa nhé."; }
+  else { rank="HỌC TRÒ CHĂM"; emoji="🌱"; desc="Đừng buồn nhé! “Có công mài sắt, có ngày nên kim” – chơi lại là em tiến bộ ngay thôi."; }
+
+  $("rankEmoji").textContent = emoji;
+  $("rankName").textContent = (state.player ? state.player.toUpperCase() + " – " : "") + rank;
+  $("finalScore").textContent = s;
+  $("rankDesc").textContent = desc + (state.best>=4 ? "  (Chuỗi đúng dài nhất của em: " + state.best + " câu liên tiếp 🔥)" : "");
+
+  const rs = $("roundScores");
+  rs.innerHTML = "";
+  ROUNDS.forEach((r,i)=>{
+    const got = state.roundScores[i] !== undefined ? state.roundScores[i] : 0;
+    const d = document.createElement("div");
+    d.className = "rs";
+    d.innerHTML = "<b>"+r.emoji+"</b><span>"+r.name+"</span><i>"+got+"/"+r.questions.length+"</i>";
+    rs.appendChild(d);
+  });
+
+  const box = $("reviewBox");
+  if(state.wrong.length === 0){
+    box.innerHTML = '<h3>🎯 Không sai câu nào – tuyệt đối chính xác!</h3>';
+  }else{
+    let html = '<h3>📖 Cùng xem lại ' + state.wrong.length + ' câu chưa đúng nhé</h3>';
+    state.wrong.forEach(w=>{
+      html += '<div class="rv">'
+        + '<div class="qq">' + w.roundEmoji + ' ' + w.q + '</div>'
+        + '<div>Em chọn: <span class="bb">' + w.picked + '</span> &nbsp;→&nbsp; Đáp án đúng: <span class="aa">' + w.correct + '</span></div>'
+        + '<div style="margin-top:4px;font-weight:600">' + w.why + '</div>'
+        + '</div>';
+    });
+    box.innerHTML = html;
+  }
+
+  if(s >= 22){ sndWin(); confetti(90); } else { sndRound(); confetti(30); }
+  show("s-end");
+}
+
+/* ===================== SỰ KIỆN ===================== */
+$("btnStart").addEventListener("click", startGame);
+$("playerName").addEventListener("keydown", e=>{ if(e.key==="Enter") startGame(); });
+$("btnGoRound").addEventListener("click", ()=>{ sndClick(); renderQuestion(); });
+$("btnNext").addEventListener("click", nextQuestion);
+$("btnNextRound").addEventListener("click", nextRound);
+$("btnAgain").addEventListener("click", ()=>{ sndClick(); show("s-start"); });
+$("btnPrint").addEventListener("click", ()=>window.print());
+$("btnSound").addEventListener("click", function(){
+  soundOn = !soundOn;
+  this.textContent = soundOn ? "🔊" : "🔇";
+  this.setAttribute("aria-label", soundOn ? "Tắt âm thanh" : "Bật âm thanh");
+  if(soundOn) sndClick();
+});
+
+document.addEventListener("keydown", e=>{
+  if($("s-quiz").classList.contains("on")){
+    if(["1","2","3","4"].includes(e.key)){
+      const b = $("opts").children[Number(e.key)-1];
+      if(b && !b.disabled) b.click();
+    }
+    if(e.key==="Enter" && state.answered) nextQuestion();
+  }else if($("s-round").classList.contains("on") && e.key==="Enter"){
+    $("btnGoRound").click();
+  }else if($("s-done").classList.contains("on") && e.key==="Enter"){
+    $("btnNextRound").click();
+  }
+});
+</script>
+</body>
+</html>
